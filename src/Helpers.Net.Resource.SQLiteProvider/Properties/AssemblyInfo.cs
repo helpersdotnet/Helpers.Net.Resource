@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Helpers.Net.Resource.SqlProvider")]
+[assembly: AssemblyTitle("Helpers.Net.Resource.SQLiteProvider")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Prabir Shrestha")]
-[assembly: AssemblyProduct("Helpers.Net.Resource.SqlProvider")]
+[assembly: AssemblyProduct("Helpers.Net.Resource.SQLiteProvider")]
 [assembly: AssemblyCopyright("Copyright © Prabir Shrestha 2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e6a9cd96-5f7b-46d6-a745-bb96582d3991")]
+[assembly: Guid("8bf4107e-5f56-4ca8-b4a0-7036478aa87e")]
 
 // Version information for an assembly consists of the following four values:
 //
