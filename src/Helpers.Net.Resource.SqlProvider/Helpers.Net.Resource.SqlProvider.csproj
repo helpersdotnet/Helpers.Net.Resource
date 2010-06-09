@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{54A758F5-FDA4-43B0-BB6F-72FD2FFB6579}</ProjectGuid>
+    <ProjectGuid>{7F71C63F-CC48-4AF4-9863-555F9B5B5CC2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Helpers.Net.Resource.Web</RootNamespace>
-    <AssemblyName>Helpers.Net.Resource.Web</AssemblyName>
+    <RootNamespace>Helpers.Net.Resource</RootNamespace>
+    <AssemblyName>Helpers.Net.Resource.SqlProvider</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
