@@ -19,3 +19,6 @@ _ReSharper.*/
 
 # Misc Ignores
 Thumbs.db
+
+# Helpers.Net.Resource.SQLiteProvider specific ignores
+src/Helpers.Net.Resource.SQLiteProvider/sqlite.sql
