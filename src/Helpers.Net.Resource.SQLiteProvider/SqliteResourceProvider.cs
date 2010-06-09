@@ -1,14 +1,17 @@
 using System;
+using System.Collections;
 using System.Globalization;
 using System.Resources;
 using System.Web.Compilation;
 
 namespace Helpers.Net.Resource
 {
-    class SqliteResourceProvider : IResourceProvider
+    sealed class SqliteResourceProvider : IResourceProvider
     {
         private readonly string _virtualPath;
         private readonly string _className;
+        private IDictionary _resourceCache;
+        private static object _cultureNeutralKey = new object();
 
         public SqliteResourceProvider(string virtualPath, string className)
         {
