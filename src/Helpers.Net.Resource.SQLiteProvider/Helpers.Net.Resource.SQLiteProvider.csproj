@@ -43,6 +43,22 @@
     <Compile Include="SqliteResourceProviderFactory.cs" />
     <Compile Include="SqliteResourceReader.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="sqlite.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>sqlite.sql</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="sqlite.sql">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>sqlite.tt</DependentUpon>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
