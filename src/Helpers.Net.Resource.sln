@@ -5,6 +5,28 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers.Net.Resource.SqlPro
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers.Net.Resource.SQLiteProvider", "Helpers.Net.Resource.SQLiteProvider\Helpers.Net.Resource.SQLiteProvider.csproj", "{3C17FA59-53AA-43FE-A27B-0D02F59E25E1}"
 EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SQLiteWebsite", "SQLiteWebsite\", "{9BF80585-F83B-4D71-B1CF-E92454C073BE}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
+		ProjectReferences = "{3C17FA59-53AA-43FE-A27B-0D02F59E25E1}|Helpers.Net.Resource.SQLiteProvider.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/SQLiteWebsite"
+		Debug.AspNetCompiler.PhysicalPath = "SQLiteWebsite\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SQLiteWebsite\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/SQLiteWebsite"
+		Release.AspNetCompiler.PhysicalPath = "SQLiteWebsite\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\SQLiteWebsite\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "4373"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +41,10 @@ Global
 		{3C17FA59-53AA-43FE-A27B-0D02F59E25E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C17FA59-53AA-43FE-A27B-0D02F59E25E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C17FA59-53AA-43FE-A27B-0D02F59E25E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BF80585-F83B-4D71-B1CF-E92454C073BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF80585-F83B-4D71-B1CF-E92454C073BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BF80585-F83B-4D71-B1CF-E92454C073BE}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF80585-F83B-4D71-B1CF-E92454C073BE}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

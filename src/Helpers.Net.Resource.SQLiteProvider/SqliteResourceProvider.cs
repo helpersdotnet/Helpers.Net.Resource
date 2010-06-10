@@ -12,40 +12,46 @@ namespace Helpers.Net.Resource
     {
         private readonly string _virtualPath;
         private readonly string _className;
-        private IDictionary _resourceCache;
+        private static IDictionary _resourceCache;
         private static object _cultureNeutralKey = new object();
         private readonly string _connectionString;
         private readonly string _dbPrefix;
+
+        public static void ClearCache()
+        {
+            _resourceCache = null;
+        }
 
         public SQLiteResourceProvider(string virtualPath, string className)
         {
             _virtualPath = virtualPath;
             _className = className;
-            _connectionString = ConfigurationManager.AppSettings["Helpers.Net.Resource.SQLiteProvider-connectionString"] ?? string.Empty;
+            string connectionStringName = ConfigurationManager.AppSettings["Helpers.Net.Resource.SQLiteProvider-connectionStringName"] ?? string.Empty;
             _dbPrefix = ConfigurationManager.AppSettings["Helpers.Net.Resource.SQLiteProvider-dbPrefix"] ?? string.Empty;
 
-            if (string.IsNullOrEmpty(_connectionString))
+            if (string.IsNullOrEmpty(connectionStringName))
                 throw new ArgumentNullException(
                     "Helpers.Net.Resource.SQLiteProvider-connectionString is not specified in AppSettings.");
+            _connectionString = ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
         }
 
         IDictionary GetResourceCache(string cultureName)
         {
-            object cultureKey;
-            if (string.IsNullOrEmpty(cultureName))
-                cultureKey = cultureName;
-            else
-                cultureKey = _cultureNeutralKey;
+            if (cultureName == null)
+                cultureName = string.Empty;
 
             if (_resourceCache == null)
                 _resourceCache = new ListDictionary();
 
-            IDictionary resourceDict = _resourceCache[cultureKey] as IDictionary;
+            IDictionary resourceDict = _resourceCache[cultureName] as IDictionary;
             if (resourceDict == null)
             {
-                resourceDict = SQLiteResourceHelper.GetResources(_virtualPath, _className, cultureName, false, null,
-                                                                 _connectionString, _dbPrefix);
-                _resourceCache[cultureKey] = resourceDict;
+                if (_resourceCache.Contains(cultureName))
+                    resourceDict = _resourceCache[cultureName] as IDictionary;
+                else
+                    resourceDict = SQLiteResourceHelper.GetResources(_virtualPath, _className, cultureName, false, null,
+                                                                     _connectionString, _dbPrefix);
+                _resourceCache[cultureName] = resourceDict;
             }
             return resourceDict;
         }
@@ -63,18 +69,22 @@ namespace Helpers.Net.Resource
         ///                 </param>
         public object GetObject(string resourceKey, CultureInfo culture)
         {
-            string cultureName = null;
+            string cultureName;
             if (culture != null)
                 cultureName = culture.Name;
             else
                 cultureName = CultureInfo.CurrentUICulture.Name;
 
+            // try to find original: en-US
             object value = GetResourceCache(cultureName)[resourceKey];
+
+            // if can find try to fall back to generic: en
+            if (value == null && cultureName.Length > 3)
+                value = GetResourceCache(cultureName.Substring(0, 2))[resourceKey];
+
+            // if not find default
             if (value == null)
-            { // if resource is missing for current culture, use default
-                SQLiteResourceHelper.AddResource(resourceKey, _virtualPath, _className, cultureName, _connectionString,
-                                                 _dbPrefix);
-            }
+                value = GetResourceCache(null)[resourceKey];
             return value;
         }
 

@@ -20,23 +20,47 @@ namespace Helpers.Net.Resource
                 return GetGlobalResource(className, cultureName, designMode, serviceProvider, connectionString, dbPrefix);
             }
 
-            // neither virtualPath or className was provided
-            // unknown if Local or Global resource
+            //neither virtualPath or className was provided
+            //unknown if Local or Global resource
 
             throw new Exception("virtualPath or className missing from parameters.");
         }
 
         private static IDictionary GetGlobalResource(string className, string cultureName, bool designMode, IServiceProvider serviceProvider, string connectionString, string dbPrefix)
         {
-            throw new NotImplementedException();
+            using (SQLiteConnection cn = new SQLiteConnection(connectionString))
+            {
+                SQLiteCommand cmd = new SQLiteCommand(cn);
+                if (string.IsNullOrEmpty(cultureName))
+                {
+                    cmd.CommandText =
+                        string.Format(
+                            "SELECT ResourceName,ResourceValue FROM {0}Globalization WHERE (CultureName IS NULL OR CultureName='') AND ClassName=@className",
+                            dbPrefix);
+                    cmd.Parameters.AddWithValue("@className", className);
+                }
+                else
+                {
+                    cmd.CommandText =
+                       string.Format(
+                           "SELECT ResourceName,ResourceValue FROM {0}Globalization WHERE CultureName=@cultureName AND ClassName=@className",
+                           dbPrefix);
+                    cmd.Parameters.AddWithValue("@cultureName", cultureName);
+                    cmd.Parameters.AddWithValue("@className", className);
+                }
+
+                ListDictionary resources = new ListDictionary();
+                cn.Open();
+                IDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                    resources.Add(reader[0], reader[1]);
+
+                return resources;
+            }
         }
 
         private static ListDictionary GetLocalResource(string virtualPath, string cultureName, bool designMode, IServiceProvider serviceProvider, string connectionString, string dbPrefix)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void AddResource(string resourceName, string virtualPath, string className, string cultureName, string connectionString, string dbPrefix)
         {
             throw new NotImplementedException();
         }

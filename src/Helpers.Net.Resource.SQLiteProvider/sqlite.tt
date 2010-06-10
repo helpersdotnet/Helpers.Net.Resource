@@ -12,7 +12,7 @@ CREATE TABLE <#= DBPrefix #>Localization(
 CREATE INDEX idx_<#= DBPrefix #>Localization ON <#= DBPrefix #>Localization(CultureName, VirtualPath, ResourceName);
 
 CREATE TABLE <#= DBPrefix #>Globalization(
-	CultureName		varchar(5) NOT NULL,
+	CultureName		varchar(5) DEFAULT NULL,
 	ClassName		varchar(512) NOT NULL,
 	ResourceName 	varchar(512) NOT NULL,
 	ResourceValue 	text NOT NULL

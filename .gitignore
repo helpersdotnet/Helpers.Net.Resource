@@ -1,5 +1,6 @@
 # Visual Studio Ignores
 bin/
+Bin/
 obj/
 
 *.suo

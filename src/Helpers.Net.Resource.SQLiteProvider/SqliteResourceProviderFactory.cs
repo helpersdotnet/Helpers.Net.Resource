@@ -4,6 +4,11 @@ namespace Helpers.Net.Resource
 {
     public class SQLiteResourceProviderFactory : ResourceProviderFactory
     {
+        public static void ClearCache()
+        {
+            SQLiteResourceProvider.ClearCache();
+        }
+
         #region Overrides of ResourceProviderFactory
 
         /// <summary>
