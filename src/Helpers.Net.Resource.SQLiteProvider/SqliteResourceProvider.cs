@@ -43,15 +43,20 @@ namespace Helpers.Net.Resource
             if (_resourceCache == null)
                 _resourceCache = new ListDictionary();
 
-            IDictionary resourceDict = _resourceCache[cultureName] as IDictionary;
+
+            string key = cultureName;
+            if (!string.IsNullOrEmpty(_virtualPath))
+                key = cultureName + _virtualPath;
+
+            IDictionary resourceDict = _resourceCache[key] as IDictionary;
             if (resourceDict == null)
             {
-                if (_resourceCache.Contains(cultureName))
-                    resourceDict = _resourceCache[cultureName] as IDictionary;
+                if (_resourceCache.Contains(key))
+                    resourceDict = _resourceCache[key] as IDictionary;
                 else
                     resourceDict = SQLiteResourceHelper.GetResources(_virtualPath, _className, cultureName, false, null,
                                                                      _connectionString, _dbPrefix);
-                _resourceCache[cultureName] = resourceDict;
+                _resourceCache[key] = resourceDict;
             }
             return resourceDict;
         }

@@ -24,6 +24,10 @@
         Global resource example:
         <asp:Label Text='<%$ Resources:Messages, Color %>' runat="server" />
     </div>
+     <div style="border: 1px solid;">
+        Global resource example:
+        <asp:Label ID="lblHello" meta:resourcekey="lblHello" runat="server" />
+    </div>
     <p>
     </p>
     <asp:Button ID="Button2" Text="Clear Resource Cache" runat="server" OnClick="ClearResourceCache_Click" />

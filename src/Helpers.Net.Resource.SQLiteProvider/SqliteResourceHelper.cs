@@ -62,7 +62,36 @@ namespace Helpers.Net.Resource
 
         private static ListDictionary GetLocalResource(string virtualPath, string cultureName, bool designMode, IServiceProvider serviceProvider, string connectionString, string dbPrefix)
         {
-            throw new NotImplementedException();
+            using (SQLiteConnection cn = new SQLiteConnection(connectionString))
+            {
+                SQLiteCommand cmd = new SQLiteCommand(cn);
+                if (string.IsNullOrEmpty(cultureName))
+                {
+                    cmd.CommandText =
+                        string.Format(
+                            "SELECT ResourceName,ResourceValue FROM {0}Localization WHERE (CultureName IS NULL OR CultureName='') AND VirtualPath=@virtualPath",
+                            dbPrefix);
+                    cmd.Parameters.AddWithValue("@virtualPath", virtualPath);
+                }
+                else
+                {
+                    cmd.CommandText =
+                       string.Format(
+                           "SELECT ResourceName,ResourceValue FROM {0}Localization WHERE CultureName=@cultureName AND VirtualPath=@virtualPath",
+                           dbPrefix);
+                    cmd.Parameters.AddWithValue("@cultureName", cultureName);
+                    cmd.Parameters.AddWithValue("@virtualPath", virtualPath);
+                }
+
+                ListDictionary resources = new ListDictionary();
+                cn.Open();
+                IDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                    resources.Add(reader[0], reader[1]);
+
+                return resources;
+            }
         }
     }
 }
