@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Globalization;
 using System.Resources;
@@ -28,6 +29,27 @@ namespace Helpers.Net.Resource
                     "Helpers.Net.Resource.SQLiteProvider-connectionString is not specified in AppSettings.");
         }
 
+        IDictionary GetResourceCache(string cultureName)
+        {
+            object cultureKey;
+            if (string.IsNullOrEmpty(cultureName))
+                cultureKey = cultureName;
+            else
+                cultureKey = _cultureNeutralKey;
+
+            if (_resourceCache == null)
+                _resourceCache = new ListDictionary();
+
+            IDictionary resourceDict = _resourceCache[cultureKey] as IDictionary;
+            if (resourceDict == null)
+            {
+                resourceDict = SqliteResourceHelper.GetResources(_virtualPath, _className, cultureName, false, null,
+                                                                 _connectionString, _dbPrefix);
+                _resourceCache[cultureKey] = resourceDict;
+            }
+            return resourceDict;
+        }
+
         #region Implementation of IResourceProvider
 
         /// <summary>
@@ -41,7 +63,19 @@ namespace Helpers.Net.Resource
         ///                 </param>
         public object GetObject(string resourceKey, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            string cultureName = null;
+            if (culture != null)
+                cultureName = culture.Name;
+            else
+                cultureName = CultureInfo.CurrentUICulture.Name;
+
+            object value = GetResourceCache(cultureName)[resourceKey];
+            if (value == null)
+            { // if resource is missing for current culture, use default
+                SqliteResourceHelper.AddResoruce(resourceKey, _virtualPath, _className, cultureName, _connectionString,
+                                                 _dbPrefix);
+            }
+            return value;
         }
 
         /// <summary>
@@ -52,7 +86,7 @@ namespace Helpers.Net.Resource
         /// </returns>
         public IResourceReader ResourceReader
         {
-            get { throw new NotImplementedException(); }
+            get { return new SqliteResourceReader(GetResourceCache(null)); }
         }
 
         #endregion
