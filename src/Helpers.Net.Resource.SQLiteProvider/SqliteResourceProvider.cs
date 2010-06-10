@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Configuration;
 using System.Globalization;
 using System.Resources;
 using System.Web.Compilation;
@@ -12,11 +13,19 @@ namespace Helpers.Net.Resource
         private readonly string _className;
         private IDictionary _resourceCache;
         private static object _cultureNeutralKey = new object();
+        private readonly string _connectionString;
+        private readonly string _dbPrefix;
 
         public SqliteResourceProvider(string virtualPath, string className)
         {
             _virtualPath = virtualPath;
             _className = className;
+            _connectionString = ConfigurationManager.AppSettings["Helpers.Net.Resource.SQLiteProvider-connectionString"] ?? string.Empty;
+            _dbPrefix = ConfigurationManager.AppSettings["Helpers.Net.Resource.SQLiteProvider-dbPrefix"] ?? string.Empty;
+
+            if (string.IsNullOrEmpty(_connectionString))
+                throw new ArgumentNullException(
+                    "Helpers.Net.Resource.SQLiteProvider-connectionString is not specified in AppSettings.");
         }
 
         #region Implementation of IResourceProvider
