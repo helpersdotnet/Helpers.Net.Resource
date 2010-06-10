@@ -3,11 +3,11 @@ using System.Resources;
 
 namespace Helpers.Net.Resource
 {
-    sealed class SqliteResourceReader : IResourceReader
+    sealed class SQLiteResourceReader : IResourceReader
     {
         private readonly IDictionary _resources;
 
-        public SqliteResourceReader(IDictionary resources)
+        public SQLiteResourceReader(IDictionary resources)
         {
             _resources = resources;
         }

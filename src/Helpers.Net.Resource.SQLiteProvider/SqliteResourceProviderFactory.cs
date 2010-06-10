@@ -2,7 +2,7 @@
 
 namespace Helpers.Net.Resource
 {
-    public class SqliteResourceProviderFactory : ResourceProviderFactory
+    public class SQLiteResourceProviderFactory : ResourceProviderFactory
     {
         #region Overrides of ResourceProviderFactory
 
@@ -16,7 +16,7 @@ namespace Helpers.Net.Resource
         ///                 </param>
         public override IResourceProvider CreateGlobalResourceProvider(string classKey)
         {
-            return new SqliteResourceProvider(null, classKey);
+            return new SQLiteResourceProvider(null, classKey);
         }
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Helpers.Net.Resource
         public override IResourceProvider CreateLocalResourceProvider(string virtualPath)
         {
             virtualPath = System.IO.Path.GetFileName(virtualPath);
-            return new SqliteResourceProvider(virtualPath, null);
+            return new SQLiteResourceProvider(virtualPath, null);
         }
 
         #endregion

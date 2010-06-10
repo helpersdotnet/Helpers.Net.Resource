@@ -40,10 +40,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqliteResourceHelper.cs" />
-    <Compile Include="SqliteResourceProvider.cs" />
-    <Compile Include="SqliteResourceProviderFactory.cs" />
-    <Compile Include="SqliteResourceReader.cs" />
+    <Compile Include="SQLiteResourceHelper.cs" />
+    <Compile Include="SQLiteResourceProvider.cs" />
+    <Compile Include="SQLiteResourceProviderFactory.cs" />
+    <Compile Include="SQLiteResourceReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sqlite.tt">

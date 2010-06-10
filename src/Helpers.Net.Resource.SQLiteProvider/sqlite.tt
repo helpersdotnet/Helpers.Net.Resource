@@ -3,17 +3,19 @@
 <# string DBPrefix=""; #>
 
 CREATE TABLE <#= DBPrefix #>Localization(
-	CultureId		varchar(5) NOT NULL,
+	CultureName		varchar(5) DEFAULT NULL,
+	VirtualPath		varchar(512) NOT NULL,
 	ResourceName 	varchar(512) NOT NULL,
 	ResourceValue 	text NOT NULL
 );
 
-CREATE INDEX idx_<#= DBPrefix #>Localization ON <#= DBPrefix #>Localization(CultureId, ResourceName);
+CREATE INDEX idx_<#= DBPrefix #>Localization ON <#= DBPrefix #>Localization(CultureName, VirtualPath, ResourceName);
 
 CREATE TABLE <#= DBPrefix #>Globalization(
-	CultureId		varchar(5) NOT NULL,
+	CultureName		varchar(5) NOT NULL,
+	ClassName		varchar(512) NOT NULL,
 	ResourceName 	varchar(512) NOT NULL,
 	ResourceValue 	text NOT NULL
 );
 
-CREATE INDEX idx_<#= DBPrefix #>Globalization ON <#= DBPrefix #>Globalization(CultureId, ResourceName);
+CREATE INDEX idx_<#= DBPrefix #>Globalization ON <#= DBPrefix #>Globalization(CultureName, ClassName, ResourceName);

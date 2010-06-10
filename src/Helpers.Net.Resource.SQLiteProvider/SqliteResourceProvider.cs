@@ -8,7 +8,7 @@ using System.Web.Compilation;
 
 namespace Helpers.Net.Resource
 {
-    sealed class SqliteResourceProvider : IResourceProvider
+    sealed class SQLiteResourceProvider : IResourceProvider
     {
         private readonly string _virtualPath;
         private readonly string _className;
@@ -17,7 +17,7 @@ namespace Helpers.Net.Resource
         private readonly string _connectionString;
         private readonly string _dbPrefix;
 
-        public SqliteResourceProvider(string virtualPath, string className)
+        public SQLiteResourceProvider(string virtualPath, string className)
         {
             _virtualPath = virtualPath;
             _className = className;
@@ -43,7 +43,7 @@ namespace Helpers.Net.Resource
             IDictionary resourceDict = _resourceCache[cultureKey] as IDictionary;
             if (resourceDict == null)
             {
-                resourceDict = SqliteResourceHelper.GetResources(_virtualPath, _className, cultureName, false, null,
+                resourceDict = SQLiteResourceHelper.GetResources(_virtualPath, _className, cultureName, false, null,
                                                                  _connectionString, _dbPrefix);
                 _resourceCache[cultureKey] = resourceDict;
             }
@@ -72,7 +72,7 @@ namespace Helpers.Net.Resource
             object value = GetResourceCache(cultureName)[resourceKey];
             if (value == null)
             { // if resource is missing for current culture, use default
-                SqliteResourceHelper.AddResoruce(resourceKey, _virtualPath, _className, cultureName, _connectionString,
+                SQLiteResourceHelper.AddResource(resourceKey, _virtualPath, _className, cultureName, _connectionString,
                                                  _dbPrefix);
             }
             return value;
@@ -86,7 +86,7 @@ namespace Helpers.Net.Resource
         /// </returns>
         public IResourceReader ResourceReader
         {
-            get { return new SqliteResourceReader(GetResourceCache(null)); }
+            get { return new SQLiteResourceReader(GetResourceCache(null)); }
         }
 
         #endregion
