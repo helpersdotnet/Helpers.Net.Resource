@@ -2,8 +2,14 @@
 
 namespace Helpers.Net.Resource
 {
+    /// <summary>
+    /// Resource provider factory for SQLite
+    /// </summary>
     public class SQLiteResourceProviderFactory : ResourceProviderFactory
     {
+        /// <summary>
+        /// Removes SQLite resource cache.
+        /// </summary>
         public static void ClearCache()
         {
             SQLiteResourceProvider.ClearCache();
@@ -12,26 +18,24 @@ namespace Helpers.Net.Resource
         #region Overrides of ResourceProviderFactory
 
         /// <summary>
-        /// When overridden in a derived class, creates a global resource provider. 
+        /// Creates a global resource provider.
         /// </summary>
         /// <returns>
         /// An <see cref="T:System.Web.Compilation.IResourceProvider"/>.
         /// </returns>
-        /// <param name="classKey">The name of the resource class.
-        ///                 </param>
+        /// <param name="classKey">The name of the resource class.</param>
         public override IResourceProvider CreateGlobalResourceProvider(string classKey)
         {
             return new SQLiteResourceProvider(null, classKey);
         }
 
         /// <summary>
-        /// When overridden in a derived class, creates a local resource provider. 
+        /// Creates a local resource provider. 
         /// </summary>
         /// <returns>
         /// An <see cref="T:System.Web.Compilation.IResourceProvider"/>.
         /// </returns>
-        /// <param name="virtualPath">The path to a resource file.
-        ///                 </param>
+        /// <param name="virtualPath">The path to a resource file.</param>
         public override IResourceProvider CreateLocalResourceProvider(string virtualPath)
         {
             virtualPath = System.IO.Path.GetFileName(virtualPath);
