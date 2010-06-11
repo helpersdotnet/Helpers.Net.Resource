@@ -13,7 +13,6 @@ namespace Helpers.Net.Resource
         private readonly string _virtualPath;
         private readonly string _className;
         private static IDictionary _resourceCache;
-        private static object _cultureNeutralKey = new object();
         private readonly string _connectionString;
         private readonly string _dbPrefix;
 
