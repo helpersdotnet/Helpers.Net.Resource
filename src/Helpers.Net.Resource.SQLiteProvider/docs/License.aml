@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="24504fda-d3ef-4dd9-8335-6db8b25d00f2" revisionNumber="1">
+    <developerConceptualDocument
+	  xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+	  xmlns:xlink="http://www.w3.org/1999/xlink">
+
+        <introduction>
+            <autoOutline />
+        </introduction>
+
+        <para>Helpers.Net.Resource is intended to be used in both open-source and commercial environments.</para>
+
+        <section address="License Agreement">
+            <title>New BSD License (3-clause license)</title>
+            <content>
+
+                <para>Copyright (c) 2010, Prabir Shrestha</para>
+                <para>All rights reserved.</para>
+
+                <para>
+                    Redistribution and use in source and binary forms, with or without
+                    modification, are permitted provided that the following conditions are met:
+                </para>
+
+
+                <list class="bullet">
+                    <listItem>
+                        Redistributions of source code must retain the above copyright
+                        notice, this list of conditions and the following disclaimer.
+                    </listItem>
+                    <listItem>
+                        Redistributions in binary form must reproduce the above copyright
+                        notice, this list of conditions and the following disclaimer in the
+                        documentation and/or other materials provided with the distribution.
+                    </listItem>
+                    <listItem>
+                        Neither the name of the Helpers.Net nor the
+                        names of its contributors may be used to endorse or promote products
+                        derived from this software without specific prior written permission.
+                    </listItem>
+                </list>
+
+                <para>
+                    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+                    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+                    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+                    DISCLAIMED. IN NO EVENT SHALL PRABIR SHRESTHA BE LIABLE FOR ANY
+                    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+                    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+                    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+                    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+                    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+                    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+                </para>
+
+            </content>
+        </section>
+
+        <section address="Copyright Notices">
+            <title>Copyright Notices</title>
+            <content>
+                <para>
+                    The full source to the wrapper and SQLite engine (<externalLink>
+                        <linkText>System.Data.SQLite</linkText>
+                        <linkUri>http://sqlite.phxsoftware.com/</linkUri>
+                        <linkTarget>_blank</linkTarget>
+                    </externalLink>) used in this project is in the public domain.
+                    There are zero licensing restrictions for private or commercial use.
+                </para>
+
+                <para>
+                    All other code is Copyright &#169; 2010, <externalLink>
+                        <linkText>Prabir Shrestha</linkText>
+                        <linkUri>http://www.prabir.me</linkUri>
+                        <linkTarget>_blank</linkTarget>
+                    </externalLink>, All Rights Reserved.
+                </para>
+
+            </content>
+        </section>
+
+        <relatedTopics />
+
+    </developerConceptualDocument>
+</topic>
