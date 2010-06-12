@@ -2,4 +2,7 @@
 <Topics defaultTopic="2fd0db74-410b-4c55-a152-9ccbeeef36a5">
   <Topic id="2fd0db74-410b-4c55-a152-9ccbeeef36a5" visible="True" title="Overview" />
   <Topic id="24504fda-d3ef-4dd9-8335-6db8b25d00f2" visible="True" />
+  <Topic id="87cc1886-85a5-4b6a-84d1-c3785ffc0646" visible="True">
+    <Topic id="55fd2267-d4e9-4e7d-bde0-53eceff11ae4" visible="True" title="Walkthrough: Enabling SQLiteProvider" />
+  </Topic>
 </Topics>

@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="55fd2267-d4e9-4e7d-bde0-53eceff11ae4" revisionNumber="1">
+    <developerHowToDocument xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <!--
+    <summary>
+      <para>Optional summary abstract</para>
+    </summary>
+    -->
+        <introduction>
+            <para>
+                This walkthrough will describe the steps needed to enable localization and globalization using SQLite as the datastore
+                for ASP.NET Web Forms website.
+            </para>
+
+            <autoOutline />
+        </introduction>
+        <!-- Optional procedures followed by optional code example but must have
+         at least one procedure or code example -->
+        <section address="Reference Libraries">
+            <title>Reference Libraries</title>
+            <content>
+                <procedure>
+                    <title>Add reference</title>
+                    <steps class="ordered">
+                        <step>
+                            <content>
+                                <para>
+                                    <legacyBold>Reference System.Data.SQLite.dll</legacyBold>
+                                </para>
+                                <para>System.Data.SQLite needs to be referenced as it uses this library to access SQLite database.</para>
+                            </content>
+                        </step>
+                        <step>
+                            <content>
+                                <para>
+                                    <legacyBold>Reference Helpers.Net.Resource.SQLiteProvider.dll</legacyBold>
+                                </para>
+                                <para>This library is responsible for using SQLite database as the datastore for localization and globalization.</para>
+                            </content>
+                        </step>
+                    </steps>
+
+                </procedure>
+            </content>
+        </section>
+
+        <section address="Web.Config">
+            <title>Edit Web.Config</title>
+            <content>
+                Some of the configurations must be added or changed in web.config inorder to use SQLite database file as the localization and globalization provider.
+                <procedure>
+                    <title>Enable Helpers.Net.Resource.SQLiteProvider</title>
+                    <steps class="ordered">
+                        <step>
+                            <content>
+                                <para>First step involves changing the globalization resource provider factory type.</para>
+                                <code language="xml">
+                                    &lt;system.web&gt;
+                                    &lt;globalization resourceProviderFactoryType=&quot;Helpers.Net.Resource.SQLiteResourceProviderFactory&quot;/&gt;
+                                    &lt;!-- code emitted for brevity --&gt;
+                                    &lt;/system.web&gt;
+                                </code>
+
+                                <alert class="note">
+                                    <para>&lt;globalization> must be specified under &lt;system.web&gt;.</para>
+                                </alert>
+                            </content>
+                        </step>
+                        <step>
+                            <content>
+                                <para>
+                                    <legacyBold>Add SQLite connection string</legacyBold>
+                                </para>
+                                <para>
+                                    Add a connection string pointing to SQLite database.
+                                </para>
+                                <code language="xml">
+                                    &lt;connectionStrings&gt;
+                                    &lt;add name=&quot;SampleDB&quot; connectionString=&quot;Data Source=App_Data\\sqlite_database_file.db3;Version=3;&quot;/&gt;
+                                    &lt;/connectionStrings&gt;
+                                </code>
+                                <alert class="tip">
+                                    <para>
+                                        If you want to refere to App_Data folder, it is preferable to use |DataDirectory| instead.
+                                        Data Source=|DataDirectory|sqlite_database_file.db3
+                                    </para>
+                                </alert>
+                            </content>
+                        </step>
+                        <step>
+                            <content>
+                                <para>
+                                    <legacyBold>Modify AppSettings</legacyBold>
+                                </para>
+                                <para>
+                                    Add <legacyBold>Helpers.Net.Resource.SQLiteProvider-connectionStringName</legacyBold> as key in AppSettings and
+                                    value as the SQLite database connection string name specified in the above step.
+                                </para>
+                                <code language="xml">
+                                    &lt;appSettings&gt;
+                                    &lt;add key=&quot;Helpers.Net.Resource.SQLiteProvider-connectionStringName&quot; value=&quot;SampleDB&quot;/&gt;
+                                    &lt;/appSettings&gt;
+                                </code>
+                                <alert class="note">
+                                    <para>
+                                        Optional AppSettings key <legacyBold>Helpers.Net.Resource.SQLiteProvider-dbPrefix</legacyBold> is also allowed,
+                                        incase you have specified to add a prefix in the Database Table.
+                                    </para>
+                                </alert>
+                            </content>
+                        </step>
+                    </steps>
+                    <!-- <conclusion>Optional conclusion</conclusion> -->
+                </procedure>
+            </content>
+        </section>
+
+        <section address="SQL">
+            <title>SQL</title>
+            <content>
+                <para>Two tables are required for Helpers.Net.Resource.SQLiteProvider to function - Localization table and Globalization table.</para>
+                <procedure>
+                    <title>SQL Table Structure</title>
+                    <steps class="ordered">
+                        <step>
+                            <content>
+                                <para>
+                                    <legacyBold>Localization Table</legacyBold>
+                                </para>
+                                <para>
+                                    Create a table to store Localization data.
+                                </para>
+                                
+								<code language="sql">
+									CREATE TABLE Localization(
+										CultureName     varchar(5) DEFAULT NULL COLLATE NOCASE,
+										VirtualPath     varchar(512) NOT NULL COLLATE NOCASE,
+										ResourceName    varchar(512) NOT NULL COLLATE NOCASE,
+										ResourceValue   text NOT NULL
+									);
+								</code>
+
+								<alert class="tip">
+								  <para>To improve performance, indexing can also be added to CultureName, VirtualPath and ResourceName.</para>
+								  	<code language="sql">
+										CREATE INDEX idx_Localization ON Localization(CultureName, VirtualPath, ResourceName);
+									</code>
+								</alert>
+
+                            </content>
+                        </step>
+                        <step>
+                            <content>
+                                <para>
+                                    <legacyBold>Globalization Table</legacyBold>
+                                </para>
+                                <para>
+                                    Create a table to store Globalization data.
+                                </para>
+
+                                <code language="sql">
+                                    CREATE TABLE Globalization(
+                                        CultureName     varchar(5) DEFAULT NULL COLLATE NOCASE,
+                                        ClassName       varchar(512) NOT NULL COLLATE NOCASE,
+                                        ResourceName    varchar(512) NOT NULL COLLATE NOCASE,
+                                        ResourceValue   text NOT NULL
+                                    );
+                                </code>
+
+                                <alert class="tip">
+                                    <para>To improve performance, indexing can also be added to CultureName, VirtualPath and ResourceName.</para>
+                                    <code language="sql">
+                                        CREATE INDEX idx_Globalization ON Globalization(CultureName, ClassName, ResourceName);
+                                    </code>
+                                </alert>
+
+                            </content>
+                        </step>
+                    </steps>
+
+                </procedure>
+            </content>
+        </section>
+
+        <relatedTopics>
+        </relatedTopics>
+
+    </developerHowToDocument>
+</topic>
