@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<topic id="00000000-0000-0000-0000-000000000000" revisionNumber="1">
+  <developerTroubleshootingDocument
+    xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <introduction>
+      <autoOutline />
+    </introduction>
+
+    <!-- Zero or more sections.  These are collapsible.  If using
+         <autoOutline />, add an address attribute to identify it and specify
+         a title so that it can be jumped to with a hyperlink. -->
+    <section address="UseInWebsite">
+      <title>How do I use it in my website?</title>
+      <content>
+        <para>Refer to <link xlink:href="55fd2267-d4e9-4e7d-bde0-53eceff11ae4" /></para>
+      </content>
+    </section>
+    
+    <section address="Resource not updating">
+      <title>Resource is not updating, after I change it in Database.</title>
+      <content>
+        <para>
+        	Whenever a resource is requested, it first checks in the cache.
+        	If it is present in the cache it returns from the cache else fetches
+        	from the database and stores it in the cache.
+        </para>
+        <para>
+        	You will be getting old resource even after you update the Database if
+        	the resource was in the cache. To overcome this, clear the cache by calling
+        	<codeEntityReference>M:Helpers.Net.Resource.SQLiteResourceProviderFactory.ClearCache</codeEntityReference>
+        	
+			<code language="cs">
+        	Helpers.Net.Resource.SQLiteResourceProviderFactory.ClearCache();
+			</code>
+
+        </para>
+      </content>
+    </section>
+
+    <relatedTopics>
+     
+    </relatedTopics>
+  </developerTroubleshootingDocument>
+</topic>

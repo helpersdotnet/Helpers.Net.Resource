@@ -56,8 +56,8 @@
                                 <para>First step involves changing the globalization resource provider factory type.</para>
                                 <code language="xml">
                                     &lt;system.web&gt;
-                                    &lt;globalization resourceProviderFactoryType=&quot;Helpers.Net.Resource.SQLiteResourceProviderFactory&quot;/&gt;
-                                    &lt;!-- code emitted for brevity --&gt;
+	                                    &lt;globalization resourceProviderFactoryType=&quot;Helpers.Net.Resource.SQLiteResourceProviderFactory&quot;/&gt;
+	                                    &lt;!-- code emitted for brevity --&gt;
                                     &lt;/system.web&gt;
                                 </code>
 
@@ -76,7 +76,7 @@
                                 </para>
                                 <code language="xml">
                                     &lt;connectionStrings&gt;
-                                    &lt;add name=&quot;SampleDB&quot; connectionString=&quot;Data Source=App_Data\\sqlite_database_file.db3;Version=3;&quot;/&gt;
+                                    	&lt;add name=&quot;SampleDB&quot; connectionString=&quot;Data Source=App_Data\\sqlite_database_file.db3;Version=3;&quot;/&gt;
                                     &lt;/connectionStrings&gt;
                                 </code>
                                 <alert class="tip">

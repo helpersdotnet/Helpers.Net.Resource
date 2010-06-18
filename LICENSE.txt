@@ -1,3 +1,5 @@
+http://www.prabir.me
+http://github.com/helpersdotnet/Helpers.Net.Resource
 
 ============================================================================================
 Helpers.Net.Resource is intended to be used in both open-source and commercial environments.

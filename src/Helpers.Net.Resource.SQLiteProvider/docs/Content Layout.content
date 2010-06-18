@@ -5,4 +5,5 @@
   <Topic id="87cc1886-85a5-4b6a-84d1-c3785ffc0646" visible="True">
     <Topic id="55fd2267-d4e9-4e7d-bde0-53eceff11ae4" visible="True" title="Walkthrough: Enabling SQLiteProvider" />
   </Topic>
+  <Topic id="00000000-0000-0000-0000-000000000000" visible="True" title="Frequently Asked Questions (FAQ)" />
 </Topics>

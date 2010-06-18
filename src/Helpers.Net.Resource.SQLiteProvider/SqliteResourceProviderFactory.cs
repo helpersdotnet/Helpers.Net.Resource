@@ -10,6 +10,11 @@ namespace Helpers.Net.Resource
         /// <summary>
         /// Removes SQLite resource cache.
         /// </summary>
+        /// <remarks>
+        /// If you modified the localization or globalization values form the database, it may not
+        /// get those new values as it is stored in the cache. To retrieve the latest values, empy
+        /// the cache by calling this ClearCache() method.
+        /// </remarks>
         public static void ClearCache()
         {
             SQLiteResourceProvider.ClearCache();
